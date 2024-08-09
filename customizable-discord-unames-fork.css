@@ -1,0 +1,248 @@
+/* ==UserStyle==
+@name         Customizable Discord - Fork
+@namespace    USO Archive
+@author       anony548679, birb-naise
+@description  A fork that adds some extra QoL, customization features & visual improvements to the excellent "Customizable Discord" theme by birb-naise.
+@version      20240603.23.01-custom-2024-08-09
+@license      CC0-1.0
+@preprocessor uso
+@advanced dropdown bg "Background (⚠ Don't use images uploaded to Discord, they expire ⚠)" {
+    bg-none "None*" <<<EOT EOT;
+    noelle "Noelle" <<<EOT https://i.imgur.com/pWKivE4.jpeg EOT;
+    a "Chika" <<<EOT https://i.imgur.com/tpkDRFf.png EOT;
+    aibg "Ai" <<<EOT https://i.imgur.com/KK08VK2.png EOT;
+    b "Chiaki" <<<EOT https://i.imgur.com/9rdTjS1.png EOT;
+    emu "Emu" <<<EOT https://i.imgur.com/tpkDRFf.png EOT;
+	bg-custom-dropdown "Custom" <<<EOT /*[[bg-custom]]*\/ EOT;
+}
+@var text bg-custom "Background (⚠ Don't use images uploaded to Discord, they expire ⚠) (Custom)" "https://example.com/image.png"
+@var color bg-color "Background Color" #000
+@var color h-color "Highlight Color" #000
+@var range bg-opacity "Background Opacity" 100
+@var range h-opacity "Highlights Opacity" 0
+@var range h-amount "Highlight Amount" 30
+@var range h-server-bar "Server Bar Highlight" 50
+@var range h-user-area "User Area Highlight" 0
+@advanced dropdown font "Font" {
+    ggsans "gg sans (Default)*" <<<EOT gg sans EOT;
+    arial "Arial" <<<EOT Arial EOT;
+    arialblack "Arial Black" <<<EOT Arial Black EOT;
+    cambria "Cambria" <<<EOT Cambria EOT;
+    candara "Candara" <<<EOT Candara EOT;
+    centurygothic "Century Gothic" <<<EOT Century Gothic EOT;
+    comicsansms "Comic Sans MS" <<<EOT Comic Sans MS EOT;
+    Consolas "Consolas" <<<EOT Consolas EOT;
+    couriernew "Courier New" <<<EOT Courier New EOT;
+    rockwell "Rockwell" <<<EOT Rockwell EOT;
+
+}
+@var range bgf "Brightness" 100
+@var number bgf-blur"Blur" 0
+@advanced dropdown h-text-box "Text Box Highlight" {
+    ga "Dark*" <<<EOT var(--theme-highlight-transparent) EOT;
+    gb "Light" <<<EOT var(--special-highlight-2-transparent) EOT;
+}
+
+@advanced dropdown theme "Theme (switch theme on discord too)" {
+    ba "Dark*" <<<EOT
+/*------------ DARK MODE COLORS ------------*\/
+:root {
+    --theme-text: #dcddde;
+    --theme-muted: #9d9d9d;
+    --theme-bg-color-theme: #fff 50%;
+    --brand-500-color-theme: #fff 30%;
+    --theme-popup-color-theme: #000 30%
+} EOT;
+    bb "Light" <<<EOT
+/*------------ LIGHT MODE COLORS ------------*\/
+:root {
+    --theme-text: #24273d;
+    --theme-muted: #4c4f69;
+    --theme-bg-color-theme: #000 50%;
+    --brand-500-color-theme: #000 30%;
+    --theme-popup-color-theme: #000 30%
+    
+} EOT;
+}
+
+@advanced dropdown material "Rounding (Experimental)" {
+    fa "No*" <<<EOT EOT;
+    fb "Yes" <<<EOT
+section[class^=title_],
+#add_friend-tab,
+#online-tab,
+#all-tab,
+#pending-tab,
+#blocked-tab,
+div[class^=sidebar],
+div[class=channelTextArea],
+section[class^=searchResultsWrap_]{
+border-radius: 25px
+}
+
+[class^=buttonsInner_]{
+    border-radius: 25px
+}
+
+[data-list-id=guildsnav]{
+    border-radius: 25px
+}
+
+[class^=content_][role=list]{
+border-radius:50px/35px
+}
+
+/*Adding some padding to make everything look nicer*\/
+div[class=content]{
+padding-left: 5px;
+padding-top: 5px
+}
+
+div[class^=sidebar]{
+padding-left: 5px
+}
+
+div[class=subtitleContainer]{
+padding-left: 5px
+} EOT;
+}
+
+@var color themecolor "Theme Color" #505574
+==/UserStyle== */
+@-moz-document domain("discord.com") {
+/*////////////// DARK/LIGHT MODE COLORS //////////////*/
+/*[[theme]]*/
+
+:root {
+    background: url("/*[[bg]]*/");
+    background-size: cover;
+    --theme-color: /*[[themecolor]]*/;
+    --theme-font: /*[[font]]*/;
+    --theme-bg-color: color-mix(in srgb, var(--bg-color), var(--theme-bg-color-theme));    /*Setting the colours to be used in transparency settings*/
+    --theme-popup-color: color-mix(in srgb, var(--bg-color), var(--theme-popup-color-theme));
+    --brand-500-color: color-mix(in srgb, var(--bg-color), var(--brand-500-color-theme));  /*DM icon's background color*/
+
+    /*Highlight colors*/
+    --h-color-no-a: rgb(from /*[[h-color]]*/ r g b / calc(alpha + (1 - alpha)));
+    --theme-highlight-color: color-mix(in srgb, var(--bg-color-no-a), var(--h-color-no-a) /*[[h-amount]]*/%);    /*General highlights*/
+    --theme-highlight-transparent: color-mix(in srgb, var(--theme-highlight-color) /*[[h-opacity]]*/%, #0000);
+    --special-highlight-color: color-mix(in srgb, var(--bg-color-no-a), var(--h-color-no-a) /*[[h-server-bar]]*/%); /*Server bar highlight*/
+    --special-highlight-transparent: color-mix(in srgb, var(--special-highlight-color) /*[[h-opacity]]*/%, #0000); /*Adding back the alpha*/
+    --special-highlight-2-color: color-mix(in srgb, var(--bg-color), #fff 5%);
+    --special-highlight-2-transparent: color-mix(in srgb, var(--special-highlight-2-color) /*[[h-opacity]]*/%, #0000);
+
+    /*Other colors*/
+    --theme-bg: color-mix(in srgb, var(--theme-bg-color) 20%, #0000);
+    --theme-popup: color-mix(in srgb, var(--theme-popup-color) 80%, #0000);
+    --theme-bg-dim: #0000;
+    --brand-500: color-mix(in srgb, var(--brand-500-color) 80%, #0000);    /*DM icon's background transparency*/
+    --bg-color-no-a: rgb(from /*[[bg-color]]*/ r g b / calc(alpha + (1 - alpha)));
+    --bg-color: color-mix(in srgb, var(--bg-color-no-a) /*[[bgf]]*/%, #000);
+    --background-secondary-alt-color: color-mix(in srgb, #0000, var(--h-color-no-a) /*[[h-user-area]]*/%)
+}
+    
+body {
+    background: color-mix(in srgb, var(--bg-color) /*[[bg-opacity]]*/%, #0000); /*Background color*/
+    backdrop-filter: blur(/*[[bgf-blur]]*/px) /*Background filters*/
+}
+    
+/*////////////// BACKGROUND COLORS //////////////*/
+.theme-dark,
+.theme-light{
+    --background-primary: #0000;
+    --background-secondary: #0000;
+    --background-tertiary: #0000;
+    --background-floating: var(--theme-popup);
+    --background-secondary-alt: color-mix(in srgb, var(--background-secondary-alt-color) /*[[h-opacity]]*/%, #0000); /*User area*/
+        
+    --modal-background: var(--theme-bg);
+    --modal-footer-background: #0000;
+    --input-background: var(--theme-bg);
+    --channeltextarea-background: /*[[h-text-box]]*/;
+
+    --background-modifier-hover: var(--theme-bg);
+    --background-modifier-selected: var(--theme-bg);
+
+    --elevation-low: #0000;                       /* shadows */
+    --primary-630: var(--theme-bg);                       /* Active Now activities */
+    --profile-gradient-primary-color: var(--theme-bg)    /* default profile bg */
+}
+
+.stickyHeader_bd05f1{
+    background: var(--theme-popup)
+}
+
+/*////////////// TEXT //////////////*/
+:root {
+    --header-primary: var(--theme-text);
+    --header-secondary: var(--theme-text);
+    --text-normal: var(--theme-text);
+    --text-muted: var(--theme-muted);
+    --channels-default: var(--theme-muted);
+    --interactive-normal: var(--theme-muted);
+    --interactive-hover: var(--theme-text);
+    --interactive-active: var(--theme-text);
+    --interactive-muted: var(--theme-muted)
+}
+        
+/*////////////// POP-UP //////////////*/
+[role=dialog] > div:not([class*="userPopout"]),     /* general pop-ups (-profiles)*/
+div[class^="topicsDropdown"] > div,                 /* summaries pop-up */
+div[class^="topicsPillContainer"]                   /* summaries bar */
+{
+    background: var(--theme-popup) !important
+}
+   
+    
+/*////////////// THEME COLOR //////////////*/
+.theme-dark,
+.theme-light{
+    --text-link: var(--theme-color);
+    --text-brand: var(--theme-color);
+    --brand-experiment: var(--theme-color);
+    --brand-experiment-560: var(--theme-color);   /* option press bg */
+    --brand-experiment-600: var(--theme-color);
+    --button-secondary-background: var(--theme-color);
+    --status-danger: var(--theme-color);          /* ping counter / new mentions */
+    --background-accent: var(--theme-color);      /* You're viewing older messages */
+}
+
+
+/*////////////// FONT //////////////*/
+body {
+    --font-primary: var(--theme-font);
+    --font-display: var(--theme-font)
+}
+
+
+/*////////////// MISC FIXES //////////////*/
+/* push summary divider above label */
+div[class^=summary] {
+    padding-top: 1rem;
+}
+
+/*Highlights*/
+    
+div[class^=content_][role=list],   /*Members panel*/
+section[class^=searchResultsWrap_], /*Search results*/
+main[class^=container_],
+section[class^=title_],
+div[class^=sidebar]{    /*All sidebars*/
+    background: var(--theme-highlight-transparent) !important
+}
+
+[role=listbox]{
+    background: var(--theme-popup)    
+}
+
+[data-list-id=guildsnav]{   /*Server bar*/
+    background: var(--special-highlight-transparent)
+}
+
+/*Comment actions*/
+[class^=buttonsInner_]{
+    backdrop-filter: blur(6px);
+    background: var(--theme-popup-color)
+}    
+    /*[[material]]*/
+}
