@@ -6,11 +6,12 @@ A fork that adds some extra QoL, customization features &amp; visual improvement
 
 **Forked from:** https://uso.kkx.one/style/175085 (Customizable Discord)
 
-#### This style is intended for use with the Stylus addon, which can be obtained from:
+**This style is intended for use with the Stylus addon, which can be obtained from:**
 
-Firefox: https://addons.mozilla.org/en-US/firefox/addon/styl-us/
+**Firefox:** https://addons.mozilla.org/en-US/firefox/addon/styl-us/
 
-Chromium: https://chrome.google.com/webstore/detail/stylus/clngdbkpkpeebahjckkjfobafhncgmne?snuoi
+**Chromium:** https://chrome.google.com/webstore/detail/stylus/clngdbkpkpeebahjckkjfobafhncgmne?snuoi
+
 
 This style may work with Vencord, however these are currently untested waters. YMMV.
 
