@@ -1,7 +1,12 @@
 # Customizable Discord - Uname's Fork
+
 A fork that adds some extra QoL, customization features &amp; visual improvements to the excellent "Customizable Discord" theme by birb-naise.
 
-This style is intended for use with the Stylus addon, which can be obtained from:
+**Mirror:** https://userstyles.world/style/17302/customizable-discord-fork
+
+**Forked from:** https://uso.kkx.one/style/175085 (Customizable Discord)
+
+#### This style is intended for use with the Stylus addon, which can be obtained from:
 
 Firefox: https://addons.mozilla.org/en-US/firefox/addon/styl-us/
 
