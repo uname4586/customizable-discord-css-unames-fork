@@ -1,4 +1,4 @@
-# customizable-discord-css-unames-fork
+# Customizable Discord - Uname's Fork
 A fork that adds some extra QoL, customization features &amp; visual improvements to the excellent "Customizable Discord" theme by birb-naise.
 
 This style is intended for use with the Stylus addon, which can be obtained from:
