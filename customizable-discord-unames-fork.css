@@ -34,7 +34,6 @@
     ubuntu "Ubuntu" <<<EOT Ubuntu EOT;
     urwgothic "URW Gothic" <<<EOT URW Gothic EOT;
 }
-@var number bgf-blur"Blur" 0
 @advanced dropdown h-text-box "Text Box Highlight" {
     ga "Dark*" <<<EOT var(--theme-highlight-transparent) EOT;
     gb "Light" <<<EOT var(--special-highlight-2-transparent) EOT;
