@@ -67,7 +67,7 @@
 @var number bgf-contrast"Contrast" 100
 @var range bgf-grayscale"Grayscale" 0
 @var range bgf-invert"Invert" 0
-@var number bgf-sepia"Sepia" 0
+@var range bgf-sepia"Sepia" 0
 @var number bgf-saturate"Saturate" 100
 @var number bgf-hue-rotate"Hue-Rotate" 0
 
