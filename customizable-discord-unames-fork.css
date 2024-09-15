@@ -6,7 +6,7 @@
 @version      2024-09-06
 @license      CC0-1.0
 @preprocessor uso
-@advanced dropdown bg "Background (⚠ Don't use images uploaded to Discord, they expire ⚠)" {
+@advanced dropdown bg "Background" {
     bg-none "None*" <<<EOT EOT;
     noelle "Noelle" <<<EOT https://i.imgur.com/pWKivE4.jpeg EOT;
     a "Chika" <<<EOT https://i.imgur.com/tpkDRFf.png EOT;
@@ -15,7 +15,7 @@
     emu "Emu" <<<EOT https://i.imgur.com/tpkDRFf.png EOT;
 	bg-custom-dropdown "Custom" <<<EOT /*[[bg-custom]]*\/ EOT;
 }
-@var text bg-custom "Background (⚠ Don't use images uploaded to Discord, they expire ⚠) (Custom)" "https://example.com/image.png"
+@var text bg-custom "Background (Imgur links only) (Custom)" "https://example.com/image.png"
 @var color bg-color "Background Color" #000
 @var color h-color "Highlight Color" #000
 @var range bg-opacity "Background Opacity" 100
@@ -23,7 +23,7 @@
 @var range h-amount "Highlight Amount" 30
 @var range h-server-bar "Server Bar Highlight" 50
 @var range h-user-area "User Area Highlight" 0
-@var range bgf "Brightness" 100
+@var range bgf-brightness "Brightness" 100
 @advanced dropdown font "Font" {
     ggsans "gg sans (Default)*" <<<EOT gg sans EOT;
     arial "Arial" <<<EOT Arial EOT;
@@ -62,6 +62,9 @@
 }
 
 /*----------BACKDROP FILTERS----------*\/
+@advanced dropdown bgf-toggle"Backdrop filters"{
+    bgf-off "Off*" <<<EOT EOT;
+    bgf-on "On" <<<EOT backdrop-filter: blur(var(--bgf-blur)) contrast(var(--bgf-contrast)) grayscale(var(--bgf-grayscale)) invert(var(--bgf-invert)) sepia(var(--bgf-sepia)) saturate(var(--bgf-saturate)) hue-rotate(var(--bgf-hue-rotate)) /*Backdrop Filters*\/ EOT;}
 @var number bgf-blur"Blur" 0
 @var number bgf-contrast"Contrast" 100
 @var range bgf-grayscale"Grayscale" 0
@@ -71,8 +74,8 @@
 @var number bgf-hue-rotate"Hue-Rotate" 0
 
 @advanced dropdown material "Rounding (Experimental)" {
-    fa "No*" <<<EOT EOT;
-    fb "Yes" <<<EOT
+    fa "Off*" <<<EOT EOT;
+    fb "On" <<<EOT
 section[class^=title_],
 #add_friend-tab,
 #online-tab,
@@ -119,6 +122,13 @@ padding-left: 5px
 /*[[theme]]*/
 
 :root {
+    --bgf-blur: /*[[bgf-blur]]*/px;
+    --bgf-contrast: /*[[bgf-contrast]]*/%;
+    --bgf-grayscale: /*[[bgf-grayscale]]*/%;
+    --bgf-invert: /*[[bgf-invert]]*/%;
+    --bgf-sepia: /*[[bgf-sepia]]*/%;
+    --bgf-saturate: /*[[bgf-saturate]]*/%;
+    --bgf-hue-rotate: /*[[bgf-hue-rotate]]*/deg;
     background: url("/*[[bg]]*/");
     background-size: cover;
     --theme-color: /*[[themecolor]]*/;
@@ -142,13 +152,13 @@ padding-left: 5px
     --theme-bg-dim: #0000;
     --brand-500: color-mix(in srgb, var(--brand-500-color) 80%, #0000);    /*DM icon's background transparency*/
     --bg-color-no-a: rgb(from /*[[bg-color]]*/ r g b / calc(alpha + (1 - alpha)));
-    --bg-color: color-mix(in srgb, var(--bg-color-no-a) /*[[bgf]]*/%, #000);
+    --bg-color: color-mix(in srgb, var(--bg-color-no-a) /*[[bgf-brightness]]*/%, #000);
     --background-secondary-alt-color: color-mix(in srgb, #0000, var(--h-color-no-a) /*[[h-user-area]]*/%)
 }
     
 body {
     background: color-mix(in srgb, var(--bg-color) /*[[bg-opacity]]*/%, #0000); /*Background color*/
-    backdrop-filter: blur(/*[[bgf-blur]]*/px) contrast(/*[[bgf-contrast]]*/%) grayscale(/*[[bgf-grayscale]]*/%) invert(/*[[bgf-invert]]*/%) sepia(/*[[bgf-sepia]]*/%) saturate(/*[[bgf-saturate]]*/%) hue-rotate(/*[[bgf-hue-rotate]]*/deg)} /*Backdrop Filters*/
+    /*[[bgf-toggle]]*/}
     
 /*////////////// BACKGROUND COLORS //////////////*/
 .theme-dark,
